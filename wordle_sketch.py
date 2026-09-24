@@ -4,16 +4,18 @@ words = ["apple", "adieu", "plane", "sight", "minty", "slack"]
 
 index = random.randint(0,len(words)-1)
 
-solution = words[index].upper()
+solution = words[index]
 
 counter = 0
 
 guess = "00000"
 
 while guess != solution and counter < 6:
-    guess = input("Guess a word with five letters: ").upper()
+    guess = input("Guess a word with five letters: ").lower()
     if len(guess) != 5:
         print("Your word has the wrong length!")
+    elif guess.lower() not in words:
+        print("Your word is not in the list!")
     else:
         for i in range(0, len(solution)):
             if guess[i] == solution[i]:
