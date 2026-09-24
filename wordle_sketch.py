@@ -13,19 +13,14 @@ with open('word_lists/valid_solutions.csv', mode='r') as file:
     for row in reader2:
         legal_solutions.append(row['word'])
 
-
-index = random.randint(0,len(legal_solutions)-1)
-
-solution = legal_solutions[index]
+solution = random.choice(legal_solutions)
 
 counter = 0
 
 guess = "00000"
 
-correct_letters = ["_"]*5
-
 while guess != solution and counter < 6:
-    correct_letters = ["_", "_", "_", "_" ,"_"]
+    correct_letters = ["_"] * 5
     guess = input("Guess a word with five letters: ").lower()
     if len(guess) != 5:
         print("Your word has the wrong length!")
