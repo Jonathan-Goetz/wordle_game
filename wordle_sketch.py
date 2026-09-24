@@ -10,7 +10,10 @@ counter = 0
 
 guess = "00000"
 
+correct_letters = ["_", "_", "_", "_" ,"_"]
+
 while guess != solution and counter < 6:
+    correct_letters = ["_", "_", "_", "_" ,"_"]
     guess = input("Guess a word with five letters: ").lower()
     if len(guess) != 5:
         print("Your word has the wrong length!")
@@ -19,14 +22,14 @@ while guess != solution and counter < 6:
     else:
         for i in range(0, len(solution)):
             if guess[i] == solution[i]:
-                print(2)
-            elif guess[i] in solution:
-                print(1)
-            else:
-                print(0)
+                correct_letters[i] = guess[i].upper()
+        for i in range(0, len(solution)):
+             if guess[i] != solution[i] and correct_letters.count(guess[i].lower()) + correct_letters.count(guess[i].upper()) < solution.count(guess[i].lower()):
+                  correct_letters[i] = guess[i].lower()
+        print(correct_letters)
         counter += 1
 
 if guess == solution:
-    print("Congratulations, you hve guessed the words in " + str(counter) + " tries! The word was: " + solution)
+    print("Congratulations, you have guessed the words in " + str(counter) + " tries! The word was: " + solution.upper())
 else:
-    print("You ran out of guesses.")
+    print("You ran out of guesses. The word was: " + solution.upper())
