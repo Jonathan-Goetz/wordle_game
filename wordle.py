@@ -13,30 +13,47 @@ with open('word_lists/valid_solutions.csv', mode='r') as file:
     for row in reader2:
         legal_solutions.append(row['word'].lower())
 
-solution = random.choice(legal_solutions)
+play = "y"
 
-counter = 0
+while play == "y":
 
-guess = "00000"
+    solution = random.choice(legal_solutions)
 
-while guess != solution and counter < 6:
-    correct_letters = ["_"] * 5
-    guess = input("Guess a word with five letters: ").lower()
-    if len(guess) != 5:
-        print("Your word has the wrong length!")
-    elif guess.lower() not in legal_words:
-        print("Your word is not in the list!")
+    counter = 0
+
+    guess = "00000"
+
+    answer = 0
+
+    while guess != solution and counter < 6:
+        correct_letters = ["_"] * 5
+        guess = input("Guess a word with five letters: ").lower()
+        if len(guess) != 5:
+            print("Your word has the wrong length!")
+        elif guess.lower() not in legal_words:
+            print("Your word is not in the list!")
+        else:
+            for i in range(0, len(solution)):
+                if guess[i] == solution[i]:
+                    correct_letters[i] = guess[i].upper()
+            for i in range(0, len(solution)):
+                if guess[i] != solution[i] and correct_letters.count(guess[i].lower()) + correct_letters.count(guess[i].upper()) < solution.count(guess[i].lower()):
+                    correct_letters[i] = guess[i].lower()
+            print(correct_letters)
+            counter += 1
+
+    if guess == solution:
+        print("Congratulations, you have guessed the word in " + str(counter) + " tries! The word was: " + solution.upper())
     else:
-        for i in range(0, len(solution)):
-            if guess[i] == solution[i]:
-                correct_letters[i] = guess[i].upper()
-        for i in range(0, len(solution)):
-             if guess[i] != solution[i] and correct_letters.count(guess[i].lower()) + correct_letters.count(guess[i].upper()) < solution.count(guess[i].lower()):
-                  correct_letters[i] = guess[i].lower()
-        print(correct_letters)
-        counter += 1
+        print("You ran out of guesses. The word was: " + solution.upper())
 
-if guess == solution:
-    print("Congratulations, you have guessed the words in " + str(counter) + " tries! The word was: " + solution.upper())
-else:
-    print("You ran out of guesses. The word was: " + solution.upper())
+    while answer == 0:
+        again = input("Would you like to play again? (y/n) ")
+        if again == "y":
+            play = "y"
+            answer = 1
+        elif again == "n":
+            play = "n"
+            answer = 1
+        else:
+            print("Please answer with y for yes or n for no!")
