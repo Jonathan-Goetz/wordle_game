@@ -3,15 +3,15 @@ import csv
 
 with open('word_lists/valid_guesses.csv', mode='r') as file:
     reader1 = csv.DictReader(file)
-    legal_words = []
+    legal_words = set()
     for row in reader1:
-        legal_words.append(row['word'])
+        legal_words.add(row['word'].lower())
 
 with open('word_lists/valid_solutions.csv', mode='r') as file:
     reader2 = csv.DictReader(file)
     legal_solutions = []
     for row in reader2:
-        legal_solutions.append(row['word'])
+        legal_solutions.append(row['word'].lower())
 
 solution = random.choice(legal_solutions)
 
