@@ -15,8 +15,7 @@ with open('word_lists/valid_solutions.csv', mode='r') as file:
         legal_solutions.append(row['word'].lower())
 
 def play_again():
-    answer = 0
-    while answer == 0:
+    while True:
             again = input("Would you like to play again? (y/n) ").lower()
             if again in ("y", "n"):
                 return again
@@ -55,8 +54,6 @@ while play == "y":
     solution = random.choice(legal_solutions)
     counter = 0
     guess = ""
-
-    answer = 0
 
     while guess != solution and counter < 6:
         guess = get_guess()
