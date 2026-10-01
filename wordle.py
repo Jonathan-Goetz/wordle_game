@@ -21,7 +21,7 @@ while play == "y":
 
     counter = 0
 
-    guess = "00000"
+    guess = ""
 
     answer = 0
 
@@ -56,4 +56,4 @@ while play == "y":
             play = "n"
             answer = 1
         else:
-            print("Please answer with y for yes or n for no!")
+            print("Please answer with 'y' for yes or 'n' for no!")
